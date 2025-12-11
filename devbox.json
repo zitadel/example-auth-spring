@@ -1,0 +1,26 @@
+{
+  "$schema": "https://raw.githubusercontent.com/jetify-com/devbox/0.10.7/.schema/devbox.schema.json",
+  "packages": [
+    "jdk17@latest",
+    "maven@latest"
+  ],
+  "shell": {
+    "init_hook": [
+      "mvn --batch-mode --show-version dependency:go-offline"
+    ],
+    "scripts": {
+      "format": [
+        "mvn spotless:apply"
+      ],
+      "test": [
+        "mvn verify"
+      ],
+      "check": [
+        "mvn compile"
+      ],
+      "docgen": [
+        "mvn javadoc:javadoc"
+      ]
+    }
+  }
+}
