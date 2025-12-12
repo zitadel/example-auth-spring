@@ -17,6 +17,8 @@
   <description>Demo project for Spring Boot</description>
   <properties>
     <java.version>17</java.version>
+    <!-- Added for JaCoCo integration -->
+    <jacoco.agent>${argLine}</jacoco.agent>
   </properties>
 
   <dependencies>
@@ -81,6 +83,8 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
       </plugin>
+
+      <!-- SpotBugs Plugin -->
       <plugin>
         <groupId>com.github.spotbugs</groupId>
         <artifactId>spotbugs-maven-plugin</artifactId>
@@ -108,6 +112,8 @@
           </execution>
         </executions>
       </plugin>
+
+      <!-- Spotless Plugin -->
       <plugin>
         <groupId>com.diffplug.spotless</groupId>
         <artifactId>spotless-maven-plugin</artifactId>
@@ -132,7 +138,69 @@
           </execution>
         </executions>
       </plugin>
+
+      <!-- Surefire Plugin (Configured to pick up JaCoCo agent) -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>3.5.3</version>
+        <configuration>
+          <argLine>${jacoco.agent} -Xms512m -Xmx1500m</argLine>
+          <parallel>methods</parallel>
+          <useUnlimitedThreads>true</useUnlimitedThreads>
+          <reportsDirectory>${project.build.directory}/reports</reportsDirectory>
+          <trimStackTrace>false</trimStackTrace>
+        </configuration>
+      </plugin>
+
+      <!-- JaCoCo Plugin -->
+      <plugin>
+        <groupId>org.jacoco</groupId>
+        <artifactId>jacoco-maven-plugin</artifactId>
+        <version>0.8.13</version>
+        <executions>
+          <execution>
+            <id>prepare-agent</id>
+            <goals>
+              <goal>prepare-agent</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>report-html</id>
+            <phase>verify</phase>
+            <goals>
+              <goal>report</goal>
+            </goals>
+            <configuration>
+              <formats>
+                <format>HTML</format>
+              </formats>
+              <outputDirectory>${project.build.directory}/coverage/html</outputDirectory>
+              <excludes>
+                <exclude>**/api/**</exclude>
+                <exclude>**/model/**</exclude>
+              </excludes>
+            </configuration>
+          </execution>
+          <execution>
+            <id>report-xml</id>
+            <phase>verify</phase>
+            <goals>
+              <goal>report</goal>
+            </goals>
+            <configuration>
+              <formats>
+                <format>XML</format>
+              </formats>
+              <outputDirectory>${project.build.directory}/coverage</outputDirectory>
+              <excludes>
+                <exclude>**/api/**</exclude>
+                <exclude>**/model/**</exclude>
+              </excludes>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
     </plugins>
   </build>
-
 </project>
