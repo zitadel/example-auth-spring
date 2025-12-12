@@ -1,0 +1,61 @@
+name: Linting
+
+on:
+  workflow_call:
+    inputs:
+      ref:
+        required: true
+        type: string
+      commit_changes:
+        required: false
+        type: boolean
+        default: false
+
+defaults:
+  run:
+    working-directory: ./
+
+permissions:
+  contents: read
+
+jobs:
+  lint-format:
+    permissions:
+      contents: write
+    runs-on: ubuntu-latest
+    name: Reformat Code
+
+    steps:
+      - name: Harden runner
+        uses: step-security/harden-runner@0634a2670c59f64b4a01f0f96f84700a4088b9f0 # v2.12.0
+        with:
+          egress-policy: audit
+
+      - name: Checkout code
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          ref: ${{ inputs.ref }}
+
+      - name: Setup Java
+        uses: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00 # v4.7.1
+        with:
+          java-version: '17'
+          distribution: 'corretto'
+          cache: maven
+
+      - name: Install Dependencies
+        run: mvn --batch-mode --show-version dependency:go-offline
+
+      - name: Run Formatter
+        run: mvn spotless:apply --batch-mode
+
+      - name: Commit Changes
+        if: ${{ inputs.commit_changes == true }}
+        uses: stefanzweifel/git-auto-commit-action@b863ae1933cb653a53c021fe36dbb774e1fb9403 # v5.2.0
+        with:
+          commit_message: 'style: Apply automated code formatting [skip ci]'
+          commit_options: '--no-verify'
+          repository: .
+          commit_user_name: github-actions[bot]
+          commit_user_email: github-actions[bot]@users.noreply.github.com
+          commit_author: github-actions[bot] <github-actions[bot]@users.noreply.github.com>
