@@ -18,8 +18,11 @@
       "check": [
         "mvn compile"
       ],
-      "docgen": [
-        "mvn javadoc:javadoc"
+      "depcheck": [
+        "mvn dependency:analyze-report"
+      ],
+      "dev":[
+        "mvn spring-boot:run"
       ]
     }
   }

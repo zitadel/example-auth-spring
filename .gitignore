@@ -34,6 +34,4 @@ build/
 
 .env
 
-devbox.json
-devbox.lock
 .devbox
