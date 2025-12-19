@@ -6,7 +6,7 @@
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
-    <version>3.4.0</version>
+    <version>4.0.1</version>
     <relativePath/>
   </parent>
 
@@ -141,7 +141,7 @@
     <dependency>
       <groupId>com.github.spotbugs</groupId>
       <artifactId>spotbugs-annotations</artifactId>
-      <version>4.8.3</version>
+      <version>4.9.8</version>
       <scope>provided</scope>
     </dependency>
   </dependencies>
@@ -157,7 +157,7 @@
       <plugin>
         <groupId>com.github.spotbugs</groupId>
         <artifactId>spotbugs-maven-plugin</artifactId>
-        <version>4.9.3.2</version>
+        <version>4.9.8.2</version>
         <configuration>
           <effort>Max</effort>
           <threshold>Low</threshold>
@@ -186,7 +186,7 @@
       <plugin>
         <groupId>com.diffplug.spotless</groupId>
         <artifactId>spotless-maven-plugin</artifactId>
-        <version>2.46.0</version>
+        <version>3.1.0</version>
         <configuration>
           <formats>
             <format>
@@ -212,7 +212,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
-        <version>3.5.3</version>
+        <version>3.5.4</version>
         <configuration>
           <argLine>${jacoco.agent} -Xms512m -Xmx1500m</argLine>
           <parallel>methods</parallel>
@@ -226,7 +226,7 @@
       <plugin>
         <groupId>org.jacoco</groupId>
         <artifactId>jacoco-maven-plugin</artifactId>
-        <version>0.8.13</version>
+        <version>0.8.14</version>
         <executions>
           <execution>
             <id>prepare-agent</id>
