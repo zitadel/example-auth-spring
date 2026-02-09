@@ -66,19 +66,19 @@ You'll need a ZITADEL account and application configured. Follow the [ZITADEL do
 
  ### Installation and Running
 
- Follow these steps to get the application running:
+Follow these steps to get the application running:
 
- ```bash
- # 1. Clone the repository
- git clone git@github.com:zitadel/example-spring-boot-auth.git
- cd example-spring-boot-auth
+```bash
+# 1. Clone the repository
+git clone git@github.com:zitadel/example-spring-boot-auth.git
+cd example-spring-boot-auth
 
- # 2. Build the project and download dependencies
- mvn clean install
+# 2. Build the project and download dependencies
+mvn clean install
 
- # 3. Start the development server
- mvn spring-boot:run
- ```
+# 3. Start the development server
+make start
+```
 
  The application will now be running at `http://localhost:3000`.
 
