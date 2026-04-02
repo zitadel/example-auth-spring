@@ -1,0 +1,33 @@
+{
+  "name": "ZITADEL Example Spring Auth",
+  "image": "mcr.microsoft.com/devcontainers/java:17-bookworm",
+  "features": {
+    "ghcr.io/devcontainers/features/java:1": {
+      "version": "none",
+      "installMaven": "true",
+      "installGradle": "false"
+    }
+  },
+  "forwardPorts": [3000],
+  "portsAttributes": {
+    "3000": {
+      "label": "Application",
+      "onAutoForward": "notify"
+    }
+  },
+  "otherPortsAttributes": {
+    "onAutoForward": "silent"
+  },
+  "onCreateCommand": "cp -n .env.example .env",
+  "updateContentCommand": "mvn dependency:go-offline --batch-mode",
+  "hostRequirements": {
+    "memory": "2gb"
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "vscjava.vscode-java-pack"
+      ]
+    }
+  }
+}
