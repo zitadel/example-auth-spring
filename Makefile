@@ -1,5 +1,9 @@
 .PHONY: help check prepare start
 
+ifneq (,$(wildcard .env))
+include .env
+endif
+
 help:
 	@echo "Usage:"
 	@echo "  make start     Start the development server"
