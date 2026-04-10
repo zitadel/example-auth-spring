@@ -1,5 +1,6 @@
 package com.zitadel.demo.config;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -14,9 +15,12 @@ import org.springframework.security.web.authentication.logout.LogoutSuccessHandl
 public class SecurityConfig {
 
     private final ClientRegistrationRepository clientRegistrationRepository;
+    private final String postLoginUrl;
 
-    public SecurityConfig(ClientRegistrationRepository clientRegistrationRepository) {
+    public SecurityConfig(ClientRegistrationRepository clientRegistrationRepository,
+                          @Value("${zitadel.post-login-url:/profile}") String postLoginUrl) {
         this.clientRegistrationRepository = clientRegistrationRepository;
+        this.postLoginUrl = postLoginUrl;
     }
 
     @Bean
@@ -31,7 +35,7 @@ public class SecurityConfig {
                 .redirectionEndpoint(redirection ->
                     redirection.baseUri("/auth/callback")
                 )
-                .defaultSuccessUrl("/profile", true)
+                .defaultSuccessUrl(postLoginUrl, true)
                 .failureUrl("/auth/error?error=oauthcallback")
             )
             .logout(logout -> logout

@@ -1,6 +1,7 @@
 package com.zitadel.demo.controller;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,6 +19,12 @@ import java.util.Map;
 @SuppressFBWarnings("SPRING_ENDPOINT")
 public class AuthController {
 
+    private final String postLoginUrl;
+
+    public AuthController(@Value("${zitadel.post-login-url:/profile}") String postLoginUrl) {
+        this.postLoginUrl = postLoginUrl;
+    }
+
     @GetMapping("/signin")
     public String signin(@RequestParam(required = false) String error,
                          @RequestParam(required = false) String callbackUrl,
@@ -29,7 +36,7 @@ public class AuthController {
         zitadelProvider.put("signinUrl", "/oauth2/authorization/zitadel");
 
         model.addAttribute("providers", Collections.singletonList(zitadelProvider));
-        model.addAttribute("callbackUrl", callbackUrl != null ? callbackUrl : "/profile");
+        model.addAttribute("callbackUrl", callbackUrl != null ? callbackUrl : postLoginUrl);
 
         if (error != null) {
             model.addAttribute("message", getErrorMessage(error, "signin-error"));

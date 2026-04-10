@@ -32,7 +32,7 @@ You'll need a ZITADEL account and application configured. Follow the [ZITADEL do
 > **Important:** Configure the following URLs in your ZITADEL application settings:
 >
 >- **Redirect URIs:** Add `http://localhost:3000/auth/callback` (for development)
->- **Post Logout Redirect URIs:** Add `http://localhost:3000/auth/logout/success` (for development)
+- **Post Logout Redirect URIs:** Add `http://localhost:3000/auth/logout/callback` (for development)
 >
 >  These URLs must exactly match what your Spring Boot application uses. For production, add your production URLs.
 
@@ -60,9 +60,15 @@ You'll need a ZITADEL account and application configured. Follow the [ZITADEL do
  # Spring Security's default client configuration often expects one.
  # Therefore, please provide a randomly generated string here.
  ZITADEL_CLIENT_SECRET="your-randomly-generated-client-secret"
- ```
 
- *Note: Unlike the Python example, this Java application derives the callback and logout URLs automatically from the base URL and does not require them to be set in the `.env` file.*
+ # Optional. URL where users are redirected after successful login.
+ # Defaults to "/profile" if not specified.
+ ZITADEL_POST_LOGIN_URL="/profile"
+
+ # URL where users are redirected after logout. This should match a Post Logout
+ # Redirect URI configured in your ZITADEL application settings.
+ ZITADEL_POST_LOGOUT_URL="http://localhost:3000/auth/logout/callback"
+ ```
 
  ### Installation and Running
 
