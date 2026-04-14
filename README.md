@@ -76,8 +76,8 @@ Follow these steps to get the application running:
 
 ```bash
 # 1. Clone the repository
-git clone git@github.com:zitadel/example-spring-boot-auth.git
-cd example-spring-boot-auth
+git clone git@github.com:zitadel/example-auth-spring.git
+cd example-auth-spring
 
 # 2. Build the project and download dependencies
 mvn clean install
