@@ -11,7 +11,7 @@
   </parent>
 
   <groupId>com.zitadel</groupId>
-  <artifactId>demo</artifactId>
+  <artifactId>example-spring-auth</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <name>example-spring-auth</name>
   <description>Spring Boot application demonstrating ZITADEL authentication with PKCE</description>
