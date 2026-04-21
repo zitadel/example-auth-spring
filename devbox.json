@@ -21,7 +21,7 @@
       "depcheck": [
         "mvn dependency:analyze-report"
       ],
-      "dev":[
+      "dev": [
         "mvn spring-boot:run"
       ]
     }
