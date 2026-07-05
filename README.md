@@ -27,7 +27,7 @@ Before you begin, ensure you have the following:
 
 #### Account Setup
 
-You'll need a ZITADEL account and application configured. Follow the [ZITADEL documentation on creating applications](https://zitadel.com/docs/guides/integrate/login/oidc/web-app) to set up your account and create a Web application with Authorization Code + PKCE flow.
+You'll need a ZITADEL account and application configured. Follow the [ZITADEL documentation on creating applications](https://zitadel.com/docs/guides/manage/console/applications-overview) to set up your account and create a Web application with Authorization Code + PKCE flow.
 
 > **Important:** Configure the following URLs in your ZITADEL application settings:
 >
